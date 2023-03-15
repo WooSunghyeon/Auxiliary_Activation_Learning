@@ -1,0 +1,41 @@
+on fc: # layer tag, choices: fc, conv, gelu, bn, relu, softmax, matmul, layernorm
+  by_index: all # layer index
+  enable: True # enable for compressing
+  level: 256 # we adopt 8-bit quantization by default
+  ema_decay: 0.9 # the decay rate for running estimates
+
+on softmax: # layer tag, choices: fc, conv, gelu, bn, relu, softmax, matmul, layernorm
+  by_index: all # layer index
+  enable: True # enable for compressing
+  level: 256 # we adopt 8-bit quantization by default
+  ema_decay: 0.9 # the decay rate for running estimates
+  
+on matmul: # layer tag, choices: fc, conv, gelu, bn, relu, softmax, matmul, layernorm
+  by_index: all # layer index
+  enable: True # enable for compressing
+  level: 256 # we adopt 8-bit quantization by default
+  ema_decay: 0.9 # the decay rate for running estimates
+
+on bn: # layer tag, choices: fc, conv, gelu, bn, relu, softmax, matmul, layernorm
+  by_index: all # layer index
+  enable: True # enable for compressing
+  level: 256 # we adopt 8-bit quantization by default
+  ema_decay: 0.9 # the decay rate for running estimates
+  
+on layernorm: # layer tag, choices: fc, conv, gelu, bn, relu, softmax, matmul, layernorm
+  by_index: all # layer index
+  enable: True # enable for compressing
+  level: 256 # we adopt 8-bit quantization by default
+  ema_decay: 0.9 # the decay rate for running estimates  
+
+on relu: # layer tag, choices: fc, conv, gelu, bn, relu, softmax, matmul, layernorm
+  by_index: all # layer index
+  enable: True # enable for compressing
+  level: 256 # we adopt 8-bit quantization by default
+  ema_decay: 0.9 # the decay rate for running estimates
+  
+on gelu: # layer tag, choices: fc, conv, gelu, bn, relu, softmax, matmul, layernorm
+  by_index: all # layer index
+  enable: True # enable for compressing
+  level: 256 # we adopt 8-bit quantization by default
+  ema_decay: 0.9 # the decay rate for running estimates
