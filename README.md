@@ -35,6 +35,7 @@ pip install -v -e .
 ```
 + Buld Mesa for AAL
 ```bash
+conda activate aal
 cd setpup/mesa
 python setup.py develop
 ```
