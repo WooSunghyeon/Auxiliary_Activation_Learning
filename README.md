@@ -21,7 +21,6 @@ conda activate aal
 
 + Buld AAL:
 ```bash
-git clone
 cd setpup/aal
 pip install -v -e .
 ```
