@@ -30,6 +30,7 @@ We also slightly modified code of ActNN and Mesa to apply it with aal simultaneo
 + Buld ActNN for AAL
 ```bash
 conda activate aal
+cd setpup/actnn
 pip install -v -e .
 ```
 + Buld Mesa for AAL
