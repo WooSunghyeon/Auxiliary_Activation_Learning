@@ -9,16 +9,17 @@ from resnet import ResNet, ResNet_ARA, ResNet_ARA_GCP, ResNet_ASA_GCP
 from utils import progress_bar
 import numpy as np
 import actnn
+from scheduler import WarmupLinearSchedule, WarmupCosineSchedule
 
 #%%
 parser = argparse.ArgumentParser(description='Auxiliary Activation Learning')
-parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
+parser.add_argument('--lr', default=5e-2, type=float, help='learning rate')
 parser.add_argument('--batch-size', type=int, 
                     default=512, help='input batch size for training (default: 512)')
 parser.add_argument('--test-batch-size', type=int, 
                     default=512, help='input batch size for teset (default: 512)')
-parser.add_argument('--epochs', type=int, default=90,  
-                    help='number of epochs to train (default: 90)')
+parser.add_argument('--epochs', type=int, default=100,  
+                    help='number of epochs to train (default: 100)')
 parser.add_argument('--dataset', type= str ,choices = ['mnist', 'cifar10', 'cifar100', 'svhn', 'tiny-imagenet', 'imagenet'], 
                     default='cifar10', help='choose dataset (default: cifar10)')
 parser.add_argument('--model', type= str ,choices = ['resnet18' ,'resnet34','resnet50', 'resnet101', 'resnet110', 'resnet152', 'shnet'], 
@@ -204,7 +205,9 @@ def main():
     if args.scheduler == 'step':
         scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.1)
     else:
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=args.epochs)
+        scheduler = WarmupCosineSchedule(optimizer, warmup_steps=4, t_total=90)
+        if args.epochs == 100:
+            scheduler = WarmupCosineSchedule(optimizer, warmup_steps=10, t_total=100)
     
     if args.checkpoint:
         scheduler.last_epoch = start_epoch
