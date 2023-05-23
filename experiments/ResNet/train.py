@@ -31,7 +31,7 @@ parser.add_argument('--optimizer', type=str, choices = ['sgd', 'adam'], default 
                     , help = 'choose optimizer (default : sgd)')
 parser.add_argument('--scheduler', type=str, 
                     choices = ['step', 'cos'],
-                    default='step',  help='scheduler to use (default: step)')
+                    default='cos',  help='scheduler to use (default: cos)')
 parser.add_argument('--device', nargs='+', type= int,  help='device_num')
 parser.add_argument('--ARA-stride', type = int, nargs='+', help='The number of stride for ARA')
 parser.add_argument('--checkpoint', action = 'store_true', default = False,
