@@ -12,7 +12,7 @@ class Conv2d_ARA_Actnn(nn.Conv2d):
     '''
     Conv2d_ARA uses auxilairy reidual activation (ARA) to update weights in backward propagation.
     You can use get_li=True if you want to extract learning indicator.
-    In this layer, we do not ARA to input because it has been already added outside of the module in the resnet.
+    In this layer, we do not add ARA to input because it has been already added outside of the module in the resnet.
     '''
     def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, groups=1, bias=False, get_li=False):
         super(Conv2d_ARA_Actnn, self).__init__(in_channels, out_channels, kernel_size, stride=stride, padding=padding, groups=groups)
