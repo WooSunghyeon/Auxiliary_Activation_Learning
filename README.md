@@ -67,6 +67,40 @@ x, ARA = self.conv3(x, ARA)
 x, ARA = self.dsa(x, ARA)
 ```
 
++ Implementing ARA+ActNN
+```python
+import actnn
+from actnn.aal_actnn import Conv2d_ARA_Actnn, Distribute_ARA_Actnn
+from actnn.ops import quantize_activation
+from actnn.qscheme import QScheme
+
+# define convolution layer wich uses ARA_Actnn
+self.conv1 = actnn.Conv2d(64,64,3,1,1)
+self.conv2 = Conv2d_ARA_Actnn(64,64,3,1,1)
+self.conv3 = Conv2d_ARA_Actnn(64,64,3,1,1)
+# define Distribute_ARA_Actnn which is layer for implementing ARA_Actnn
+self.dsa = Distribute_ARA_Actnn()
+
+# define auxiliary residual activation for updating Conv2d_ARA_actnn
+ARA = x.clone()
+
+# define quantized auxiliary residual activation
+# In Conv2d_ARA_Actnn, we use q_ara, ... instead of ARA for memory optimization when performing backpropagation
+q_ara, q_ara_bits, q_ara_scale, q_ara_min = quantize_activation(ARA, self.scheme)
+
+# doing backpropagation for conv1
+x = self.conv1(x)
+# adding auxiliary activation to output activation (residual connection)
+# and propagating q_ara to Conv2d_ARA_Actnn
+x += ARA
+x, q_ara, q_ara_bits, q_ara_scale, q_ara_min = self.conv2(x, q_ara, q_ara_bits, q_ara_scale, q_ara_min)
+X += ARA
+x, q_ara, q_ara_bits, q_ara_scale, q_ara_min = self.conv3(x, q_ara, q_ara_bits, q_ara_scale, q_ara_min)
+# Distribute q_ara makes self.conv2 and self.conv3 updates weight with q_ara, not x!
+x, q_ara, q_ara_bits, q_ara_scale, q_ara_min = self.dsa(x, q_ara, q_ara_bits, q_ara_scale, q_ara_min)
+```
+
+
 + Implementing ASA
 ```python
 from aal.aal import Linear_ASA
