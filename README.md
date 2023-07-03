@@ -129,9 +129,7 @@ x = self.linear(x)
 
 
 ## Results
-
-![result1](https://user-images.githubusercontent.com/114454500/192739402-7dc05b90-f19a-482a-995c-ce66a3949abd.png)
-  
+![RESUTLS](https://github.com/WooSunghyeon/Auxiliary_Activation_Learning/assets/85105077/102873f4-a418-40b8-9a8e-a7c085b52ffb)  
 ![result2](https://user-images.githubusercontent.com/114454500/192739585-98379113-d735-47e9-b72a-84e92028b3b3.png)
 
  
