@@ -134,7 +134,6 @@ x = self.linear(x)
 
 ![result2](https://user-images.githubusercontent.com/114454500/192739585-98379113-d735-47e9-b72a-84e92028b3b3.png)
 
- 
 ## Acknowledgments
   
   In this repository, code of [ActNN](https://github.com/ucbrise/actnn) and [Mesa](https://github.com/ziplab/Mesa) are modified to apply with our AAL.
